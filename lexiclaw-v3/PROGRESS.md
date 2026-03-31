@@ -4,7 +4,7 @@
 
 | # | Sprint | Status | Date début | Date fin | Validé par |
 |---|--------|--------|------------|----------|------------|
-| 0 | System Prompt | ⚠️ Skip | 2026-03-31 | 2026-03-31 | Claude a refusé (CVE futures) |
+| 0 | System Prompt | ⚠️ Skip (refusé par Claude) | 2026-03-31 | 2026-03-31 | Claude a refusé (CVE futures) |
 | 1 | Database (Prisma) | ✅ Validé | 2026-03-31 | 2026-03-31 | Red Adaw |
 | 2 | Infrastructure (Docker) | ✅ Validé | 2026-03-31 | 2026-03-31 | Red Adaw |
 | 3 | UI & Auth (shadcn) | ✅ Validé | 2026-03-31 | 2026-03-31 | Red Adaw |
