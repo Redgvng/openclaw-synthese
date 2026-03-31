@@ -4,23 +4,24 @@
 
 | # | Sprint | Status | Date début | Date fin | Validé par |
 |---|--------|--------|------------|----------|------------|
-| 0 | System Prompt | ✅ Validé | 2026-03-31 | 2026-03-31 | Red Adaw |
+| 0 | System Prompt | ⚠️ Skip | 2026-03-31 | 2026-03-31 | Claude a refusé (CVE futures) |
 | 1 | Database (Prisma) | ✅ Validé | 2026-03-31 | 2026-03-31 | Red Adaw |
 | 2 | Infrastructure (Docker) | ✅ Validé | 2026-03-31 | 2026-03-31 | Red Adaw |
 | 3 | UI & Auth (shadcn) | ✅ Validé | 2026-03-31 | 2026-03-31 | Red Adaw |
-| 4 | AI Chat (Vercel AI SDK) | ⏳ En attente | — | — | — |
-| 5 | Workflows & Skills (BullMQ) | ⏳ En attente | — | — | — |
+| 4 | AI Chat (Vercel AI SDK) | ✅ Validé | 2026-03-31 | 2026-03-31 | Red Adaw |
+| 5 | Workflows & Skills (BullMQ) | ✅ Validé | 2026-03-31 | 2026-03-31 | Red Adaw |
 
 ## Règles
 - ✅ Séquentiel uniquement
 - ✅ Validation avant sprint suivant
 - ✅ Prompts en anglais (originaux du repo)
 - ✅ Sécurité OpenClaw respectée
+- ⚠️ Prompt 0 skip (Claude a détecté des CVE futures comme injection)
 
 ## Notes de progression
 
-### Prompt 0 — Validé (2026-03-31)
-System prompt envoyé à Claude Code CLI. Règles de sécurité OpenClaw acceptées.
+### Prompt 0 — Skip (2026-03-31)
+Claude Code a refusé le system prompt — considère les références CVE-2026-25253 et "ClawHavoc" comme des prompt injections. Les règles de sécurité sont appliquées manuellement dans docker-compose.yml.
 
 ### Sprint 1 — Validé (2026-03-31)
 - Next.js 16.2.1 initialisé (TypeScript, Tailwind v4, App Router)
@@ -48,8 +49,17 @@ System prompt envoyé à Claude Code CLI. Règles de sécurité OpenClaw accept�
 - Build Next.js réussi (11 pages)
 - Composants : Sidebar, Topbar, Button, Input, Table, Card, Avatar, Badge, Dialog, DropdownMenu, ScrollArea, Tabs, Toast
 
-### Sprint 4 — En attente
-*En attente du rate limit Claude Code (reset 15h00 UTC)*
+### Sprint 4 — Validé (2026-03-31)
+- @ai-sdk/react + ai installés
+- Composant <WorkspaceChat /> créé (useChat, streaming, auto-scroll, markdown)
+- API Route /api/chat avec proxy OpenClaw par tenant
+- Chat intégré dans app/(app)/chat/page.tsx et cases/[caseId]/page.tsx
+- Case-anchored system prompt avec contexte dossier
 
-### Sprint 5 — En attente
-*À exécuter après Sprint 4*
+### Sprint 5 — Validé (2026-03-31)
+- BullMQ worker (analyze-contract) créé dans workers/
+- Queue setup dans lib/queue.ts
+- instrumentation.ts pour démarrer le worker au boot
+- SKILL.md Legal Document Analyzer créé (skills/legal-analyzer/)
+- Extraction: obligations, parties, dates, clauses, risk flags
+- Mise à jour table AI_Job après completion
