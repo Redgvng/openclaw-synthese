@@ -9,3 +9,11 @@ TASKS:
 * Build the app/(app)/layout.tsx featuring a persistent left sidebar with navigation to: Dashboard, Cases, Chat, Settings.
 
 Provide the configuration files for Tailwind/shadcn and the Layout component code.
+
+IMPORTANT: Follow the UI/UX Master Guide at docs/UI-UX-MASTER-GUIDE.md for:
+- Design tokens (exact colors, typography)
+- Dashboard architecture (Partner vs Collaborateur views)
+- Trust UI principles (citations, human-in-the-loop)
+- Inline overlay prompts
+- AI Action Toast patterns
+- Accessibility rules (WCAG AA 4.5:1 contrast)
