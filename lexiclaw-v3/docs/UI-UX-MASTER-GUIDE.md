@@ -151,7 +151,92 @@ Un tableau de bord "taille unique" est une erreur en SaaS B2B. L'interface doit 
 
 ---
 
-## 4. Composants UI spécifiques
+## 4. Le Workspace Dossier (L'Écran Principal)
+
+C'est ici que se passe 80% du travail. Le layout doit être un **"Split-Screen" (Écran divisé)** robuste et performant.
+
+### Layout Split-Screen
+
+```
+┌───────────────────────────────────────────────────────────────┐
+│ ← Retour   Affaire Dupont c/ Martin        [⏱️ 01:23:45] [⚙️]│
+├─────────────────────────────┬─────────────────────────────────┤
+│                             │  💬 Chat           │ ⚡ Actions │
+│                             │  ─────────────────────────────  │
+│    📄 Zone Visualiseur      │                                 │
+│         (60%)               │  🤖: Selon l'article 1247 du   │
+│                             │  Code Civil, le preneur doit... │
+│    ┌─────────────────────┐  │  [1]                            │
+│    │                     │  │                                 │
+│    │   PDF Viewer        │  │  ─────────────────────────────  │
+│    │   (Lazy-loading)    │  │                                 │
+│    │                     │  │  [Tapez votre message...]  [➤]  │
+│    │   Pièce jointe /    │  │                                 │
+│    │   Conclusions       │  ├─────────────────────────────────┤
+│    │                     │  │  Notes                          │
+│    │                     │  │  ─────────────────────────────  │
+│    │                     │  │  📝 Éditeur texte riche         │
+│    │                     │  │  [🎤 Dictée] [🤖 Injecter IA]  │
+│    └─────────────────────┘  │                                 │
+├─────────────────────────────┴─────────────────────────────────┤
+│ [📄 Docs] [💬 Chat] [⚡ Actions] [📝 Notes] [⏱️ Chrono]       │
+└───────────────────────────────────────────────────────────────┘
+```
+
+### Zone de Gauche (60%) — Le Visualiseur
+- **PDF Viewer performant** avec lazy-loading
+- Affiche les pièces et les conclusions
+- Navigation entre pages (scroll ou pagination)
+- Zoom in/out
+- Recherche texte dans le PDF
+- Annotations surlignées (liées aux citations IA)
+
+### Zone de Droite (40%) — Le Panneau IA
+
+| Onglet | Contenu | Fonction |
+|--------|---------|----------|
+| **💬 Chat** | Discussion streaming avec OpenClaw | Ancrée sur le contexte du document ouvert |
+| **⚡ Boutons Magiques** | Actions rapides | Générer chronologie, vérifier clauses, résumer, etc. |
+| **📝 Notes** | Éditeur texte riche | Dictée vocale (Whisper), résumés IA injectés directement |
+
+### Micro-interactions
+- **Skeleton loaders** élégants pendant que l'IA réfléchit
+- Rassurer l'utilisateur que le système fonctionne
+- Prévenir les erreurs (double-clic, rechargement)
+- Transitions douces entre les onglets (200ms ease)
+
+---
+
+## 5. Composant Flottant — Chronomètre Facturable
+
+Un composant **persistant à travers toutes les pages**, visible mais discret.
+
+### Design
+```
+┌──────────────────────────────┐
+│ ⏱️  Affaire Dupont           │
+│    01:23:45        [⏸️] [⏹️] │
+└──────────────────────────────┘
+```
+
+### Comportement
+- **Zustand state** global (persistant entre les pages)
+- Flotte en bas à droite de l'écran
+- Discret mais toujours visible
+- Affiche le nom du dossier en cours
+- Boutons : Pause / Stop
+- Ne bloque jamais l'interaction avec la page
+
+### États
+| État | Indicateur | Action |
+|------|------------|--------|
+| En cours | ⏱️ + compteur animé | Bouton ⏸️ pour pause |
+| En pause | ⏸️ + compteur figé | Bouton ▶️ pour reprendre |
+| Arrêté | ⏹️ + durée finale | Bouton 💾 pour sauvegarder |
+
+---
+
+## 6. Composants UI spécifiques
 
 ### Spotlight Search (Cmd+K)
 ```
@@ -213,7 +298,7 @@ Sélection de texte : "Le preneur s'engage à..."
 
 ---
 
-## 5. Règles d'accessibilité & Performance
+## 7. Règles d'accessibilité & Performance
 
 ### Accessibilité
 - Contraste minimum **4.5:1** pour le texte (WCAG AA)
@@ -236,7 +321,7 @@ Sélection de texte : "Le preneur s'engage à..."
 
 ---
 
-## 6. Patterns d'interaction IA
+## 8. Patterns d'interaction IA
 
 ### Streaming de réponse
 - Afficher un indicateur de frappe pendant la génération
@@ -261,7 +346,7 @@ Sélection de texte : "Le preneur s'engage à..."
 
 ---
 
-## 7. Checklist Sprint 3 (UI/UX)
+## 9. Checklist Sprint 3 (UI/UX)
 
 - [ ] Thème dark mode avec tokens exacts (#1A1A2E, #16213E, #D4AF37, #EAEAEA)
 - [ ] Typographie Inter + JetBrains Mono
@@ -275,6 +360,13 @@ Sélection de texte : "Le preneur s'engage à..."
 - [ ] Navigation clavier complète
 - [ ] Skeleton loading states
 - [ ] Responsive (desktop → tablette → mobile)
+- [ ] Split-Screen Workspace Dossier (60/40)
+- [ ] PDF Viewer avec lazy-loading
+- [ ] Panneau IA avec onglets (Chat, Boutons Magiques, Notes)
+- [ ] Dictée vocale (Whisper) dans les Notes
+- [ ] Composant Chronomètre flottant (Zustand global)
+- [ ] Skeleton loaders pour les chargements IA
+- [ ] Transitions douces entre onglets (200ms)
 
 ---
 
